@@ -2,24 +2,23 @@
 
 namespace App;
 
-use App\Model;
-use Laravel\Scout\Searchable;
+//use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use Searchable; // scout
+//    use Searchable; // scout
 
-    public function searchableAs()
-    {
-        return 'posts_index';
-    }
-
-    public function toSearchableArray()
-    {
-        $array = $this->toArray();
-
-        return $array;
-    }
+//    public function searchableAs()
+//    {
+//        return 'posts_index';
+//    }
+//
+//    public function toSearchableArray()
+//    {
+//        $array = $this->toArray();
+//
+//        return $array;
+//    }
 
     // 反向关联用户
     public function user()
