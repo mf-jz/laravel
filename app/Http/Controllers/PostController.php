@@ -6,7 +6,6 @@ use App\Zan;
 use App\Post;
 use App\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller

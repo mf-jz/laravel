@@ -57,3 +57,8 @@ Route::get('/user/{user}', '\App\Http\Controllers\UserController@show');
 Route::get('/user/{user}/fan', '\App\Http\Controllers\UserController@fan');
 #取消关注
 Route::get('/user/{user}/unfan', '\App\Http\Controllers\UserController@unFun');
+
+#主题详情页
+Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
+#投稿
+Route::post('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
