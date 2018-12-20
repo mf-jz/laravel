@@ -17,7 +17,7 @@
         </div>
     </aside>
     <aside id="widget-categories" class="widget panel panel-default">
-        <div class="panel-heading" >
+        <div class="panel-heading">
             专题
         </div>
 
