@@ -4,6 +4,8 @@ namespace App;
 
 //use Laravel\Scout\Searchable;
 
+use PhpParser\Builder;
+
 class Post extends Model
 {
 //    use Searchable; // scout
@@ -44,4 +46,23 @@ class Post extends Model
         return $this->hasOne('App\Zan')->where('user_id', $user_id);
     }
 
+    // 关联文章主题关系
+    public function postTopic()
+    {
+        return $this->hasMany('App\PostTopic', 'post_id', 'id');
+    }
+
+    // 属于本用户的文章
+    public function scopeAuthorBy(Builder $query, $author)
+    {
+        return $query->where('user_id', $author);
+    }
+
+    // 不属于某主题的文章
+    public function scopeTopicNotBy(Builder $query, $topic_id)
+    {
+        return $query->doesntHave('postTopic', 'and', function ($query) use ($topic_id) {
+            $query->where("topic_id", $topic_id);
+        });
+    }
 }
