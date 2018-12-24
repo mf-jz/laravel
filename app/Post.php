@@ -4,7 +4,7 @@ namespace App;
 
 //use Laravel\Scout\Searchable;
 
-use PhpParser\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
@@ -53,9 +53,9 @@ class Post extends Model
     }
 
     // 属于本用户的文章
-    public function scopeAuthorBy(Builder $query, $author)
+    public function scopeAuthorBy(Builder $query, $user_id)
     {
-        return $query->where('user_id', $author);
+        return $query->where('user_id', $user_id);
     }
 
     // 不属于某主题的文章

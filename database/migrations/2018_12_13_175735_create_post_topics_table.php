@@ -13,7 +13,7 @@ class CreatePostTopicTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_topic', function (Blueprint $table) {
+        Schema::create('post_topics', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('post_id')->comment('文章id');
             $table->integer('topic_id')->comment('主题id');
