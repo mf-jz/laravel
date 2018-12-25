@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Topic;
 use App\Post;
+use App\PostTopic;
 use Illuminate\Support\Facades\Auth;
 
 class TopicController extends Controller
@@ -21,6 +22,17 @@ class TopicController extends Controller
 
     public function submit(Topic $topic)
     {
-        return;
+        $this->validate(request(), [
+            "post_ids" => "required|array"
+        ]);
+
+        $post_ids = request("post_ids");
+        $topic_id = $topic->id;
+
+        foreach ($post_ids as $post_id) {
+            PostTopic::firstOrCreate(compact( "topic_id","post_id"));
+        }
+
+        return back();
     }
 }

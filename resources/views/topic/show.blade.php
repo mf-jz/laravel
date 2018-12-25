@@ -5,7 +5,7 @@
             <p>{{$topic->name}}</p>
             <footer>文章：{{$topic->post_topic_count}}</footer>
             <button class="btn btn-default topic-submit" data-toggle="modal" data-target="#topic_submit_modal"
-                    topic-id="{{$topic->id}}" _token="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy" type="button">投稿
+                    topic-id="{{$topic->id}}" type="button">投稿
             </button>
         </blockquote>
     </div>
@@ -18,7 +18,8 @@
                     <h4 class="modal-title" id="myModalLabel">我的文章</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="/topic/1/submit">
+                    <form action="/topic/{{$topic->id}}/submit" method="post">
+                        {{csrf_field()}}
                         @foreach($myPosts as $post)
                             <div class="checkbox">
                                 <label>
@@ -44,16 +45,12 @@
                         <div class="blog-post" style="margin-top: 30px">
                             <p class=""><a href="/user/{{$post->user->id}}">{{$post->user->name}}</a> {{$post->created_at->diffForHumans()}}</p>
                             <p class=""><a href="/posts/{{$post->id}}">{{$post->title}}</a></p>
-
-                            <p>{!! str_limit($post->content, 100, '...') !!}</p>
+                            <p>{!! str_limit($post->content, 200, '...') !!}</p>
                         </div>
                     @endforeach
                 </div>
-
             </div>
             <!-- /.tab-content -->
         </div>
-
-
     </div><!-- /.blog-main -->
 @endsection
