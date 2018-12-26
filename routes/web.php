@@ -62,3 +62,5 @@ Route::get('/user/{user}/unfan', '\App\Http\Controllers\UserController@unFun');
 Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
 #投稿
 Route::post('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
+
+include_once "admin.php";
