@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostTopicsTable extends Migration
+class CreateAdminUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePostTopicsTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_topics', function (Blueprint $table) {
+        Schema::create('admin_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id')->comment('文章id');
-            $table->integer('topic_id')->comment('主题id');
+            $table->string('name', 30);
+            $table->string('password', 100);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreatePostTopicsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_topics');
+        Schema::dropIfExists('admin_users');
     }
 }

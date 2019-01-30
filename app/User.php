@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticated;
 
-class User extends Authenticatable
+class User extends Authenticated
 {
     protected $fillable = ['name', 'email', 'password'];
 

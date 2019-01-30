@@ -4,9 +4,9 @@ $.ajaxSetup({
     }
 })
 
-var E = window.wangEditor
-var editor = new E('#editor')
-var $text1 = $('#text-editor')
+let E = window.wangEditor
+let editor = new E('#editor')
+let $text1 = $('#text-editor')
 editor.customConfig.onchange = function (html) {
     // 监控变化，同步更新到 textarea
     $text1.val(html)
