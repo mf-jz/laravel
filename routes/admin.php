@@ -23,5 +23,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('users/add', '\App\Admin\Controllers\UserController@add');
         # 用户保存
         Route::post('users/store', '\App\Admin\Controllers\UserController@store');
+
+        # 文章管理列表
+        Route::get('posts', '\App\Admin\Controllers\PostController@index');
+        # 文章管理操作
+        Route::post('posts/{post}/status', '\App\Admin\Controllers\PostController@status');
     });
 });
