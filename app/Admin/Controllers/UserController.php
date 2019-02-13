@@ -8,6 +8,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\AdminUser;
 
 class UserController extends Controller
 {
@@ -15,7 +16,8 @@ class UserController extends Controller
     // 用户管理列表
     public function index()
     {
-        return view('admin/user/index');
+        $users = AdminUser::paginate(10);
+        return view('admin/user/index', compact('users'));
     }
 
     // 用户添加页面
@@ -27,6 +29,15 @@ class UserController extends Controller
     // 用户保存
     public function store()
     {
-        return ;
+        $this->validate(request(), [
+            'name' => 'required|min:3',
+            'password' => 'required'
+        ]);
+        $name = request('name');
+        $password = bcrypt(request('password'));
+
+        AdminUser::create(compact('name', 'password'));
+
+        return redirect('admin/users');
     }
 }

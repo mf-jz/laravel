@@ -22,6 +22,6 @@ Route::group(['prefix' => 'admin'], function () {
         # 用户添加页面
         Route::get('users/add', '\App\Admin\Controllers\UserController@add');
         # 用户保存
-        Route::get('users/store', '\App\Admin\Controllers\UserController@store');
+        Route::post('users/store', '\App\Admin\Controllers\UserController@store');
     });
 });
