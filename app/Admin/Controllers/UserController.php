@@ -5,14 +5,12 @@
  * Date: 2019/2/12
  * Time: 11:33
  */
-
 namespace App\Admin\Controllers;
 
 use App\AdminUser;
 
 class UserController extends Controller
 {
-
     // 用户管理列表
     public function index()
     {
@@ -39,5 +37,17 @@ class UserController extends Controller
         AdminUser::create(compact('name', 'password'));
 
         return redirect('admin/users');
+    }
+
+    // 用户角色列表
+    public function role()
+    {
+        return view('admin.user.role');
+    }
+
+    // 用户分配角色
+    public function storeRole()
+    {
+
     }
 }
