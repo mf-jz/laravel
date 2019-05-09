@@ -7,12 +7,15 @@
  */
 namespace App\Admin\Controllers;
 
+use App\AdminPermission;
+
 class PermissionController extends Controller
 {
     // permissions
     public function index()
     {
-        return view('admin.permission.index');
+        $permissions = AdminPermission::paginate(10);
+        return view('admin.permission.index', compact('permissions'));
     }
 
     // 权限添加
@@ -24,6 +27,13 @@ class PermissionController extends Controller
     // 权限保存操作
     public function store()
     {
+        $this->validate(request(), [
+            'name' => 'required|min:3',
+            'description' => 'required'
+        ]);
 
+        AdminPermission::created(request('name', 'permission'));
+
+        return redirect('/admin/permission');
     }
 }
