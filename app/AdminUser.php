@@ -8,12 +8,12 @@ class AdminUser extends Authenticated
 {
     protected $rememberTokenName = '';
 
-    protected $guarded = []; // 不想被批量赋值的属性的数组
+    protected $guarded = [];
 
     // 用户拥有的角色
     public function roles()
     {
-        $this->belongsToMany('App\AdminRole', 'admin_role_user', 'user_id', 'role_id')
+        return $this->belongsToMany('App\AdminRole', 'admin_role_user', 'user_id', 'role_id')
             ->withPivot(['user_id', 'role_id']);
     }
 

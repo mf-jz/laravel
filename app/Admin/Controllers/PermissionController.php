@@ -32,8 +32,8 @@ class PermissionController extends Controller
             'description' => 'required'
         ]);
 
-        AdminPermission::created(request('name', 'permission'));
+        AdminPermission::create(request(['name', 'description']));
 
-        return redirect('/admin/permission');
+        return redirect('/admin/permissions');
     }
 }

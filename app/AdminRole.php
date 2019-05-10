@@ -12,7 +12,7 @@ class AdminRole extends Model
     public function permissions()
     {
         return $this->belongsToMany('App\AdminPermission', 'admin_permission_role', 'role_id', 'permission_id')
-            ->withPivot(['role_id', 'permission_id']);
+            ->withPivot(['role_id', 'permission_id'])->withTimestamps();;
     }
 
     // 角色授予权限

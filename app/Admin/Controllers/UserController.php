@@ -44,7 +44,7 @@ class UserController extends Controller
     public function role(AdminUser $user)
     {
         $roles = AdminRole::all();
-        $myRoles = $user->roles();
+        $myRoles = $user->roles;
         return view('admin.user.role', compact('roles', 'myRoles', 'user'));
     }
 
@@ -56,7 +56,7 @@ class UserController extends Controller
         ]);
 
         $roles = AdminRole::findMany(request('roles'));
-        $myRoles = $user->roles();
+        $myRoles = $user->roles;
 
         // 要增加的角色
         $addRoles = $roles->diff($myRoles);

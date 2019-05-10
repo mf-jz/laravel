@@ -33,7 +33,7 @@ class RoleController extends Controller
             'description' => 'required'
         ]);
 
-        AdminRole::created(request('name', 'description'));
+        AdminRole::create(request(['name', 'description']));
 
         return redirect('/admin/roles');
     }
@@ -44,7 +44,7 @@ class RoleController extends Controller
         // 所有权限
         $permissions = AdminPermission::all();
         // 角色拥有权限
-        $rolePermission = $role->permissions();
+        $rolePermission = $role->permissions;
         return view('admin.role.permission', compact('permissions', 'rolePermission', 'role'));
     }
 
@@ -56,18 +56,18 @@ class RoleController extends Controller
         ]);
 
         $permissions = AdminPermission::findMany(request('permissions'));
-        $myPermission = $role->permissions();
+        $myPermission = $role->permissions;
 
         // 要增加的权限
         $addPermission = $permissions->diff($myPermission);
         foreach ($addPermission as $permission) {
-            $role->assignRole($permission);
+            $role->grantPermission($permission);
         }
 
         // 要删除的角色
         $deletePermission = $myPermission->diff($permissions);
         foreach ($deletePermission as $permission) {
-            $role->deleteRole($permission);
+            $role->deletePermission($permission);
         }
 
         return back();

@@ -20,7 +20,7 @@
                                 <th>描述</th>
                                 <th>操作</th>
                             </tr>
-                            @foreach($permisssions as $permission)
+                            @foreach($permissions as $permission)
                                 <tr>
                                     <td>{{$permission->id}}</td>
                                     <td>{{$permission->name}}</td>
