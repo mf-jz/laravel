@@ -48,9 +48,18 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('permissions/store', '\App\Admin\Controllers\PermissionController@store');
         });
 
-        # 文章管理列表
-        Route::get('posts', '\App\Admin\Controllers\PostController@index');
-        # 文章管理操作
-        Route::post('posts/{post}/status', '\App\Admin\Controllers\PostController@status');
+        Route::group(['middleware' => 'can:post'], function () {
+            # 文章管理列表
+            Route::get('posts', '\App\Admin\Controllers\PostController@index');
+            # 文章管理操作
+            Route::post('posts/{post}/status', '\App\Admin\Controllers\PostController@status');
+        });
+
+        Route::group(['middlware' => 'can:topic'], function () {
+            # 专题管理
+            Route::resource('topics', '\App\Admin\Controllers\TopicController', [
+                'only' => ['index', 'create', 'store', 'destroy']
+            ]);
+        });
     });
 });
