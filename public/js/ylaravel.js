@@ -26,13 +26,13 @@ $(".like-button").click(function (event) {
     const target = $(event.target)
     const current_like = target.attr("like-value")
     const user_id = target.attr("like-user")
-    if (current_like == 1) {
+    if (current_like === 1) {
         $.ajax({
             url: "/user/" + user_id + "/unfan",
             type: "post",
             dataType: "json",
             success: function (data) {
-                if (data.error != 0) {
+                if (data.error !== 0) {
                     alert(data.msg);
                     return;
                 }
@@ -46,7 +46,7 @@ $(".like-button").click(function (event) {
             type: "post",
             dataType: "json",
             success: function (data) {
-                if (data.error != 0) {
+                if (data.error !== 0) {
                     alert(data.msg);
                     return;
                 }

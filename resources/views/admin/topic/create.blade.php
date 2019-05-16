@@ -7,7 +7,6 @@
         <div class="row">
             <div class="col-lg-10 col-xs-6">
                 <div class="box">
-
                     <!-- /.box-header -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -16,7 +15,7 @@
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form role="form" action="/admin/topics" method="POST">
-                            <input type="hidden" name="_token" value="RPPMc0lhvtynKELDZljXlz9UZI9uNc55ip1P8GCM">
+                            {{csrf_field()}}
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">专题名</label>
