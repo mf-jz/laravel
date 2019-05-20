@@ -17,6 +17,13 @@ class AdminUser extends Authenticated
             ->withPivot(['user_id', 'role_id']);
     }
 
+    // 用户拥有的通知
+    public function notices()
+    {
+        return $this->belongsToMany('App\Notice', 'user_notice', 'user_id', 'notice_id')
+            ->withPivot(['user_id', 'notice_id']);
+    }
+
     // 判断用户是否拥有角色
     public function isInRoles($roles)
     {
@@ -39,5 +46,11 @@ class AdminUser extends Authenticated
     public function hasPermission($permission)
     {
         return $this->isInRoles($permission->roles);
+    }
+
+    // 用户发送通知
+    public function assignNotice($notice)
+    {
+        return $this->notices()->attach($notice);
     }
 }
