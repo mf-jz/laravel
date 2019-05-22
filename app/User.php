@@ -54,4 +54,17 @@ class User extends Authenticated
         return $this->stars()->delete($fan);
     }
 
+    // 用户拥有的通知
+    public function notices()
+    {
+        return $this->belongsToMany('App\Notice', 'user_notice', 'user_id', 'notice_id')
+            ->withPivot(['user_id', 'notice_id']);
+    }
+
+    // 用户发送通知
+    public function assignNotice($notice)
+    {
+        return $this->notices()->attach($notice);
+    }
+
 }
