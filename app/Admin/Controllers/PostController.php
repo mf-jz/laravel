@@ -15,6 +15,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::withoutGlobalScope('status')->where('status', 0)->orderBy('created_at', 'desc')->paginate(10);
+        $posts->load('user'); //懒加载
         return view('admin.post.index', compact('posts'));
     }
 

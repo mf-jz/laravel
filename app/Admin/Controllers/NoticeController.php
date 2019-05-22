@@ -2,6 +2,7 @@
 namespace App\Admin\Controllers;
 
 use App\Notice;
+use App\Jobs\SendMessage;
 
 class NoticeController extends Controller
 {
@@ -23,7 +24,9 @@ class NoticeController extends Controller
             'content' => 'required|string'
         ]);
 
-        Notice::create(request(['title', 'content']));
+        $notice = Notice::create(request(['title', 'content']));
+
+        SendMessage::dispatch($notice);
 
         return redirect('/admin/notices');
     }
