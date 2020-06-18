@@ -68,5 +68,16 @@ Route::group(['prefix' => 'admin'], function () {
                 'only' => ['index', 'create', 'store']
             ]);
         });
+
+        Route::group(['middleware' => 'can:country'], function () {
+            # 县区列表
+            Route::get('countries', '\App\Admin\Controllers\CountryController@index');
+            # 县区添加页面
+            Route::get('countries/create', '\App\Admin\Controllers\CountryController@create');
+            # 县区区保存操作
+            Route::post('countries/store', '\App\Admin\Controllers\CountryController@store');
+            # 县区管理操作
+            Route::post('countries/{country}/status', '\App\Admin\Controllers\CountryController@status');
+        });
     });
 });

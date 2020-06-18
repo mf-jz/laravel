@@ -25,6 +25,30 @@ $(".post-audit").click(function (event) {
     });
 });
 
+$(".country-audit").click(function (event) {
+    if (confirm("确定执行删除操作嘛？") === false) {
+        return;
+    }
+
+    let target = $(event.target);
+    let country_id = target.attr("country-id");
+
+    $.ajax({
+        url: "/admin/countries/" + country_id + "/status",
+        type: "post",
+        dataType: "",
+        data: {},
+        success: function (data) {
+            if (data.status !== 0) {
+                alert(data.msg);
+                return;
+            }
+
+            target.parent().parent().remove();
+        }
+    });
+});
+
 $(".resource-delete").click(function (event) {
     if (confirm("确定执行删除操作嘛？") === false) {
         return;

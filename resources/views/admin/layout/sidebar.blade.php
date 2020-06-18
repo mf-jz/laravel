@@ -38,6 +38,13 @@
                     </a>
                 </li>
             @endcan
+            @can('country')
+                <li class="active treeview">
+                    <a href="/admin/countries">
+                        <i class="fa fa-dashboard"></i> <span>县区管理</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </section>
     <!-- /.sidebar -->
