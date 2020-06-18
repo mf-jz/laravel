@@ -45,6 +45,13 @@
                     </a>
                 </li>
             @endcan
+            @can('heart')
+                <li class="active treeview">
+                    <a href="/admin/hearts">
+                        <i class="fa fa-dashboard"></i> <span>爱心管理</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </section>
     <!-- /.sidebar -->

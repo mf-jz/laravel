@@ -74,10 +74,21 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('countries', '\App\Admin\Controllers\CountryController@index');
             # 县区添加页面
             Route::get('countries/create', '\App\Admin\Controllers\CountryController@create');
-            # 县区区保存操作
+            # 县区保存操作
             Route::post('countries/store', '\App\Admin\Controllers\CountryController@store');
             # 县区管理操作
             Route::post('countries/{country}/status', '\App\Admin\Controllers\CountryController@status');
+        });
+
+        Route::group(['middleware' => 'can:heart'], function () {
+            # 爱心榜单
+            Route::get('hearts', '\App\Admin\Controllers\HeartController@index');
+            # 爱心榜单添加页面
+            Route::get('hearts/create', '\App\Admin\Controllers\HeartController@create');
+            # 爱心榜单保存操作
+            Route::post('hearts/store', '\App\Admin\Controllers\HeartController@store');
+            # 爱心榜单管理操作
+            Route::post('hearts/{heart}/status', '\App\Admin\Controllers\HeartController@status');
         });
     });
 });
