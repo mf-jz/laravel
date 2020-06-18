@@ -14,6 +14,9 @@
 Route::get('/', "\App\Http\Controllers\LoginController@index");
 
 #注册页面
+Route::get('/country', '\App\Http\Controllers\CountryController@index');
+
+#注册页面
 Route::get('/register', '\App\Http\Controllers\RegisterController@index');
 #注册行为
 Route::post('/register', '\App\Http\Controllers\RegisterController@register');
