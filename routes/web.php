@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', "\App\Http\Controllers\LoginController@index");
+Route::get('/', "\App\Http\Controllers\HeartController@index");
 
 #注册页面
 Route::get('/country', '\App\Http\Controllers\CountryController@index');
