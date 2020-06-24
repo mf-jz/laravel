@@ -12,8 +12,9 @@
         body {
             background-color: #091633;
             background-image: url("./images/bg.jpg");
-            background-size: 100% auto;
+            background-size: 100% 100%;
             background-repeat: no-repeat;
+            min-height: calc(100vh - 80px);
         }
 
         .title {
@@ -36,16 +37,16 @@
 
         #box {
             width: 93%;
-            height: 1200px;
-            overflow: hidden;
-            margin: 0 auto;
+            margin: 0 auto 80px auto;
         }
 
         .frame {
             background-image: url("./images/frame.png");
             background-size: 95% 100%;
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: top center;
+            min-height: 80vh;
+            overflow: hidden;
         }
 
         .base-color {
@@ -57,7 +58,7 @@
             text-align: center !important;
         }
 
-        #list1, #list2 {
+        #list1 {
             width: 100%;
         }
     </style>
@@ -88,13 +89,11 @@
                                 <td width="38%"
                                     @if($heart->num != 1) rowspan="{{$heart->num}}" @endif>{{$heart->name}}</td>
                             @endif
-                            @if($heart->num != 0)
-                                <td class="center" width="20%" @if($heart->num != 1) rowspan="{{$heart->num}}" @endif>
-                                    @for($i = 0; $i < $heart->stars; $i++)
-                                        <img src="./images/star.png" alt="心">
-                                    @endfor
-                                </td>
-                            @endif
+                            <td class="center" width="20%">
+                                @for($i = 0; $i < $heart->stars; $i++)
+                                    <img src="./images/star.png" alt="星">
+                                @endfor
+                            </td>
                             <td width="25%">{{$heart->amount}}</td>
                             <td>{{$heart->remarks}}</td>
                         </tr>
@@ -102,33 +101,7 @@
                 @endforeach
             @endforeach
         </table>
-        <table id="list2" class="table"></table>
     </div>
 </div>
 </body>
-<script type="text/javascript">
-    var box = document.getElementById("box");
-    var l1 = document.getElementById("list1");
-    var l2 = document.getElementById("list2");
-    l2.innerHTML = l1.innerHTML;//克隆list1的数据，使得list2和list1的数据一样
-    function scrollup() {
-        if (box.scrollTop >= l1.offsetHeight) { //滚动条距离顶部的值恰好等于list1的高度时，达到滚动临界点，此时将让scrollTop=0,让list1回到初始位置，实现无缝滚动
-            box.scrollTop = 0;
-        } else {
-            box.scrollTop++;
-        }
-    }
-
-    var scrollMove = setInterval(scrollup, 30);//数值越大，滚动速度越慢
-
-    //鼠标经过时，滚动停止
-    box.onmouseover = function () {
-        clearInterval(scrollMove)
-    }
-
-    //鼠标离开时，滚动继续
-    box.onmouseout = function () {
-        scrollMove = setInterval(scrollup, 30);
-    }
-</script>
 </html>

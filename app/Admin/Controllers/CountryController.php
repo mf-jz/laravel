@@ -9,6 +9,7 @@
 namespace App\Admin\Controllers;
 
 use App\Country;
+use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
@@ -24,15 +25,18 @@ class CountryController extends Controller
         return view('admin.country.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $this->validate(request(), [
             'date_time'    => 'required|string|min:3',
             'country_name' => 'required|string|min:2',
-            'cadre'        => 'required|string|min:2',
             'person_time'  => 'required|numeric',
             'sales_amount' => 'required|numeric',
         ]);
+
+        if ($request['cadre'] == '') {
+            $request['cadre'] = ' ';
+        }
 
         $result = Country::create(request(['date_time', 'country_name', 'cadre', 'person_time', 'sales_amount']));
 

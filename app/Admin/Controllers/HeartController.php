@@ -34,17 +34,23 @@ class HeartController extends Controller
         ]);
 
         $num = DB::table('hearts')->where('name', $request["name"])->get();
-        if (count($num) == 0) {
-            $request['num'] = 1;
 
-            $result = Heart::create(request(['special', 'name', 'stars', 'cadre', 'amount', 'remarks', 'num']));
+        if (count($num) == 0) {
+            $max = DB::table('hearts')->max('order');
+
+            $request['num'] = 1;
+            $request['order'] = $max + 1;
+
+            $result = Heart::create(request(['special', 'name', 'stars', 'cadre', 'amount', 'remarks', 'num', 'order']));
         }
 
         if (count($num) > 0) {
             Heart::where('id', $num[0]->id)->update(['num' => (count($num) + 1)]);
 
             $request['num'] = 0;
-            $result = Heart::create(request(['special', 'name', 'stars', 'cadre', 'amount', 'remarks', 'num']));
+            $request['order'] = $num[0]->order;
+
+            $result = Heart::create(request(['special', 'name', 'stars', 'cadre', 'amount', 'remarks', 'num', 'order']));
         }
 
         if ($result) {

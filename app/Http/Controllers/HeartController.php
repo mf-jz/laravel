@@ -10,10 +10,12 @@ class HeartController extends Controller
     // 爱心榜单页
     public function index()
     {
-        $specials = DB::table('hearts')->select(DB::raw('count(*) as num, special'))->groupBy('special')->get();
+        $specials = DB::table('hearts')->select('special')->distinct()->get();
 
-        $hearts = Heart::all();
+        $name = DB::table('hearts')->select('name')->distinct()->get();
 
-        return view("heart.index", compact('specials', 'hearts'));
+        $hearts = Heart::orderBy('order', 'asc')->orderBy('id', 'asc')->get();
+
+        return view("heart.index", compact('specials', 'hearts', 'name'));
     }
 }
